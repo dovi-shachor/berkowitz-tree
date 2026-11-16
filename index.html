@@ -72,6 +72,9 @@ svg.wires{position:absolute;inset:0;width:2500px;height:1580px;overflow:visible;
 .card.child .nm{font-size:17px}
 .card.child .sp{font-size:13px;margin-top:4px;color:var(--ink)}
 .card.child .sp::before{content:"⚭ ";color:var(--gold)}
+.card.living{background:linear-gradient(160deg,#fffdf3 0%,#fbf0d2 100%);border:2px solid var(--gold);box-shadow:0 0 0 4px rgba(176,138,62,.16),0 8px 22px rgba(176,138,62,.28)}
+.card.living::after{content:"✦";position:absolute;bottom:6px;left:10px;color:var(--gold);font-size:15px}
+.lit{display:inline-block;font-size:12px;font-weight:700;color:#fff;background:var(--gold);border-radius:10px;padding:1px 7px;margin-inline-start:4px;vertical-align:middle;letter-spacing:.3px}
 .card.group{background:rgba(255,250,240,.82);border-style:solid;border-color:#d8c59c}
 .card.group .nm{font-size:16px}
 .card.group ul{margin:6px 0 0;padding:0 16px 0 0;font-size:12.5px;line-height:1.45}
@@ -308,8 +311,8 @@ const N = [
  he:'משה מרדכי ברקוביץ',dates:['3.1934 – 15.9.2014 · <span class="hb">כ׳ אלול תשע״ד</span>'],spouse:'יפה רות (1935)',info:'מחנך; שליח באורוגוואי',
  note:`<p>עלה ב-1947 באוניית "מדינת היהודים". מורה ברמת גן, שליח בדרום אמריקה (1967–1971), מנהל בית הספר הממ״ד בבית דגן, יו״ר המועצה הדתית בגבעת שמואל. ארבעה ילדים.</p><p><b>תאריך הלידה:</b> 10.3.1934 בתיק URO, לעומת כ׳ אדר תרצ״ד (7.3.1934) בוויקיפדיה.</p>`,
  src:'תיק URO; ויקיפדיה'},
-{id:'k4',row:5,x:880,w:220,side:'b',kind:'child',cert:'v',
- he:'חיה-לאה גרין',dates:['נ׳ 18.8.1946'],spouse:'אברהם עבר גרין (1949)',info:'חיפה',
+{id:'k4',row:5,x:880,w:220,side:'b',kind:'child living',cert:'v',
+ he:'חיה-לאה גרין <span class="lit">לאוי״ט</span>',dates:['נ׳ 18.8.1946'],spouse:'אברהם עבר גרין (1949)',info:'חיפה',
  note:`<p>עלתה עם ההורים ב-1950 בת ארבע. למדה בבר-אילן; נישאה ב-22.6.1967. שתי בנות. נקראה על שם שתי הסבתות — חיה ולאה.</p>`,
  src:'תיק URO'}
 ];
@@ -603,7 +606,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
   document.getElementById('prt').after(btn);
   let forced = null;
   function setMode(){
-    const m = forced !== null ? forced : document.documentElement.clientWidth < 820;
+    const m = forced !== null ? forced : false;
     document.body.classList.toggle('mobile', m);
     btn.textContent = m ? 'תצוגת עץ' : 'תצוגת רשימה';
     if (!m){ fit(); draw(); }
