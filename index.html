@@ -620,6 +620,11 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
 
 /* ---------- הפעלה ---------- */
 fit(); draw(); window.__setMode();
+(function centerCouple(){
+  if (stage.scrollWidth <= stage.clientWidth + 4) return;
+  const a = EL.dora.getBoundingClientRect(), b = EL.michael.getBoundingClientRect(), s = stage.getBoundingClientRect();
+  stage.scrollBy({left: (Math.min(a.left,b.left) + Math.max(a.right,b.right))/2 - (s.left + s.width/2)});
+})();
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
 window.addEventListener('load', draw);
 </script>
