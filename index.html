@@ -1,0 +1,624 @@
+<!doctype html>
+<html dir="rtl" lang="he">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>שורשי משפחת ברקוביץ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --parch:#f4ead3; --parch2:#efe2c4; --paper:#fffaf0; --ink:#3a2a1b; --muted:#7a6650;
+  --green:#2f5d46; --green-l:#e3ede6; --burg:#7a2e3a; --burg-l:#f3e2e3;
+  --gold:#b08a3e; --gold-l:#f3e7c9; --line-g:#4f7d63; --line-b:#9a4b56;
+  --shadow:0 2px 4px rgba(70,45,15,.10),0 8px 20px rgba(70,45,15,.10);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  font-family:"Assistant",system-ui,sans-serif; color:var(--ink);
+  background:var(--parch);
+  background-image:
+    radial-gradient(ellipse at 15% 10%,rgba(255,255,255,.55),transparent 55%),
+    radial-gradient(ellipse at 85% 90%,rgba(176,138,62,.14),transparent 60%),
+    radial-gradient(ellipse at 50% 50%,transparent 60%,rgba(120,85,35,.12));
+  min-height:100vh;
+}
+header.top{text-align:center;padding:26px 16px 6px}
+header.top .orn{color:var(--gold);letter-spacing:.6em;font-size:14px}
+h1{font-family:"Frank Ruhl Libre",serif;font-weight:900;font-size:44px;margin:4px 0 2px;color:var(--green);letter-spacing:.02em}
+h1 span{color:var(--burg)}
+.sub{font-family:"Frank Ruhl Libre",serif;font-size:19px;color:var(--muted);margin:0}
+.toolbar{display:flex;gap:8px;justify-content:center;align-items:center;margin:12px 0 4px;flex-wrap:wrap}
+.toolbar button{font:600 14px "Assistant",sans-serif;color:var(--green);background:var(--paper);border:1px solid #d6c39a;border-radius:20px;padding:5px 14px;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.toolbar button:hover{background:var(--gold-l)}
+.toolbar .hint{font-size:13px;color:var(--muted)}
+
+.stage{direction:ltr;overflow:auto;padding:6px 10px 10px;margin:0 auto}
+.scaler{position:relative;margin:0 auto}
+.canvas{position:absolute;top:0;left:0;width:2500px;height:1580px;transform-origin:0 0;direction:rtl}
+svg.wires{position:absolute;inset:0;width:2500px;height:1580px;overflow:visible;pointer-events:none}
+
+/* cards */
+.card{position:absolute;background:var(--paper);border:1px solid #dcc9a1;border-radius:14px;
+  box-shadow:var(--shadow);padding:12px 14px 11px;cursor:pointer;transition:transform .15s,box-shadow .15s;outline:none}
+.card:hover,.card:focus-visible{transform:translateY(-3px);box-shadow:0 4px 8px rgba(70,45,15,.14),0 14px 30px rgba(70,45,15,.16)}
+.card:focus-visible{outline:2px solid var(--gold)}
+.card.b{border-top:5px solid var(--green)}
+.card.k{border-top:5px solid var(--burg)}
+.card .nm{font-family:"Frank Ruhl Libre",serif;font-weight:700;font-size:19px;line-height:1.15}
+.card .la{direction:ltr;text-align:right;font-family:"Frank Ruhl Libre",serif;font-style:italic;font-size:12.5px;color:var(--muted);margin-top:2px;letter-spacing:.02em}
+.card .dt{font-size:13.5px;margin-top:6px;line-height:1.35}
+.card .dt .hb{color:var(--burg);font-weight:600}
+.card .pl{font-size:12.5px;color:var(--green);margin-top:3px}
+.card .pl::before{content:"⌖ ";color:var(--gold)}
+.card .in{font-size:12.5px;color:var(--muted);margin-top:4px;line-height:1.3}
+.badge{position:absolute;top:-11px;left:12px;box-shadow:0 1px 3px rgba(0,0,0,.12);font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:10px;white-space:nowrap;line-height:1.4}
+.c-v{background:var(--green);color:#fff}
+.c-p{background:#c9a24f;color:#fff}
+.c-o{background:#e8e1d2;color:#6b5d48;border:1px solid #cfc3a8}
+.c-f{background:var(--burg-l);color:var(--burg);border:1px solid #d8aab0}
+
+.card.couple{background:linear-gradient(180deg,#fffdf6,#fbf1d9);border:2px solid var(--gold);border-top-width:6px;padding:15px 16px 14px;
+  box-shadow:0 0 0 4px rgba(176,138,62,.15),var(--shadow)}
+.card.couple.b{border-top-color:var(--green)}
+.card.couple.k{border-top-color:var(--burg)}
+.card.couple .nm{font-size:24px;font-weight:900}
+.card.couple .la{font-size:14px}
+.card.couple .dt{font-size:14.5px}
+.card.couple .in{font-size:13px}
+.card.child{background:#fffcf5;padding:10px 12px}
+.card.child .nm{font-size:17px}
+.card.child .sp{font-size:13px;margin-top:4px;color:var(--ink)}
+.card.child .sp::before{content:"⚭ ";color:var(--gold)}
+.card.group{background:rgba(255,250,240,.82);border-style:solid;border-color:#d8c59c}
+.card.group .nm{font-size:16px}
+.card.group ul{margin:6px 0 0;padding:0 16px 0 0;font-size:12.5px;line-height:1.45}
+.card.group li::marker{color:var(--gold)}
+.card.group li small{color:var(--muted)}
+.card.unknown{background:transparent;border:1.5px dashed #b9a57c;box-shadow:none;text-align:center}
+.card.unknown .nm{margin:0;font-size:15px;color:var(--muted);font-weight:500}
+.card.unknown .in{font-style:italic}
+.card.small .nm{font-size:16px}
+
+.banner{position:absolute;text-align:center;font-family:"Frank Ruhl Libre",serif;pointer-events:none}
+.banner .t{font-size:25px;font-weight:900}
+.banner .s{font-size:14px;color:var(--muted);margin-top:2px}
+.banner.b .t{color:var(--green)} .banner.k .t{color:var(--burg)}
+.banner .rule{height:2px;margin:6px auto 0;width:70%;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+
+.panel{position:absolute;background:rgba(255,250,240,.9);border:1px solid #d6c39a;border-radius:14px;padding:14px 18px;box-shadow:var(--shadow);font-size:13.5px;line-height:1.45}
+.panel h3{font-family:"Frank Ruhl Libre",serif;margin:0 0 8px;font-size:18px;color:var(--green)}
+.panel .row{display:flex;align-items:center;gap:9px;margin:5px 0}
+.panel .row .badge{position:static}
+.panel svg{flex:none}
+.panel.q{border-color:var(--gold);background:linear-gradient(180deg,#fffaf0,#f8edd3)}
+.panel.q h3{color:var(--burg)}
+.panel.q p{margin:4px 0}
+
+.mlabel{position:absolute;transform:translate(-50%,-100%);font-size:11.5px;line-height:1.15;color:var(--gold);font-weight:700;text-align:center;white-space:nowrap;pointer-events:none}
+.qlabel{position:absolute;transform:translate(-50%,-50%);background:#fff7e3;border:1.5px dashed var(--gold);color:var(--burg);
+  font-size:12px;font-weight:700;padding:3px 10px;border-radius:12px;white-space:nowrap;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+.qlabel:hover{background:var(--gold-l)}
+
+/* modal */
+.overlay{position:fixed;inset:0;background:rgba(40,28,14,.42);display:none;align-items:center;justify-content:center;z-index:50;padding:16px}
+.overlay.open{display:flex}
+.modal{background:var(--paper);max-width:620px;width:100%;max-height:86vh;overflow:auto;border-radius:16px;border:2px solid var(--gold);
+  box-shadow:0 20px 60px rgba(0,0,0,.3);padding:22px 26px 20px;position:relative}
+.modal.b{border-top:7px solid var(--green)} .modal.k{border-top:7px solid var(--burg)}
+.modal h2{font-family:"Frank Ruhl Libre",serif;font-size:28px;margin:0 0 2px;color:var(--ink)}
+.modal .la{direction:ltr;text-align:right;font-family:"Frank Ruhl Libre",serif;font-style:italic;color:var(--muted);font-size:16px}
+.modal .badge{position:static;display:inline-block;margin:8px 0 6px;font-size:12px}
+.modal dl{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:10px 0;font-size:15px}
+.modal dt{color:var(--muted);font-weight:600}
+.modal dd{margin:0}
+.modal .note{font-size:14.5px;line-height:1.6;border-top:1px solid #e6d7b5;padding-top:10px;margin-top:6px}
+.modal .note p{margin:0 0 8px}
+.modal .src{font-size:13px;color:var(--muted);background:#f7efdc;border-radius:10px;padding:8px 12px;margin-top:8px}
+.modal .x{position:absolute;top:10px;left:12px;border:0;background:none;font-size:26px;color:var(--muted);cursor:pointer;line-height:1}
+
+footer{max-width:1500px;margin:8px auto 30px;padding:14px 22px;border-top:2px solid rgba(176,138,62,.5);font-size:13.5px;color:var(--muted);line-height:1.55;
+  display:grid;grid-template-columns:2fr 1fr;gap:20px}
+footer h4{font-family:"Frank Ruhl Libre",serif;color:var(--green);margin:0 0 4px;font-size:16px}
+footer ul{margin:0;padding-right:18px}
+footer .date{text-align:left;font-family:"Frank Ruhl Libre",serif;font-size:16px;color:var(--burg);align-self:end}
+
+@page{size:A3 landscape;margin:8mm}
+@media print{
+  body{background:#fbf5e6 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .toolbar,.overlay{display:none !important}
+  header.top{padding:0 0 4px}
+  h1{font-size:34px} .sub{font-size:15px}
+  .stage{overflow:visible;padding:0}
+  .card{box-shadow:none !important;transform:none !important}
+  footer{margin:4px 0 0;padding:6px 10px;font-size:10.5px;page-break-inside:avoid;break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="orn">✦ ✦ ✦</div>
+  <h1>שורשי משפחת <span>ברקוביץ</span></h1>
+  <p class="sub">אבותיהם של יחיאל מיכאל דב ברקוביץ ודובריש (דורה) לבית כ״ץ — מחרלאו, לספס ופלטיצ׳ן ועד ארץ ישראל</p>
+  <div class="toolbar">
+    <button type="button" id="zin" title="הגדלה">הגדלה +</button>
+    <button type="button" id="zout" title="הקטנה">הקטנה −</button>
+    <button type="button" id="zfit" title="התאמה לרוחב המסך">התאמה למסך</button>
+    <button type="button" id="prt" title="הדפסה ב-A3 לרוחב">הדפסה</button>
+    <span class="hint">לחיצה על כרטיס מציגה מקורות והערות</span>
+  </div>
+</header>
+
+<div class="stage" id="stage">
+  <div class="scaler" id="scaler">
+    <div class="canvas" id="canvas">
+      <svg class="wires" id="wires" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div>
+    <h4>מקורות עיקריים</h4>
+    <ul>
+      <li>תיק הפיצויים URO-TA-Pers-1621 (תצהירי מיכאל וקלמן מוניש-כ״ץ, טופס C, פתקי עבודה, 1960–1973)</li>
+      <li>מרשם האזרחי של חרלאו — אינדקס לידות, נישואין ופטירות (JewishGen, Romania Vital Records) · פנקס הקבורה של יאשי (JOWBR)</li>
+      <li>רשימת בית הקברות של חרלאו (ל. הבר גדליה, 2008) · מצבות ורישומי חברה קדישא רחובות · ויקיפדיה (משה ברקוביץ׳)</li>
+      <li>עדות שושנה נשר לבית ברקוביץ · עבודת "חקר שורשים — סבתא דורה" · עץ אבות משפחתי ותרשים משפחתי 2023</li>
+    </ul>
+    <p style="margin:6px 0 0">פירוט מלא של המקורות והסתירות: תיקיית המחקר, דוחות 04, 15, 22.</p>
+  </div>
+  <div class="date">נובמבר 2026</div>
+</footer>
+
+<div class="overlay" id="overlay" role="dialog" aria-modal="true">
+  <div class="modal" id="modal"></div>
+</div>
+
+<script>
+/* ---------- נתונים ---------- */
+const CERT = {
+  v:{t:'מאומת',c:'c-v'}, p:{t:'סביר',c:'c-p'}, o:{t:'אפשרי',c:'c-o'}, f:{t:'מסורת משפחתית',c:'c-f'}
+};
+const ROW = [24, 220, 450, 775, 1040, 1365];
+
+const N = [
+/* דור 0 — אבות-אבות */
+{id:'ymsegal',row:0,x:1840,w:200,side:'b',kind:'small',cert:'p',
+ he:'יחיאל מיכאל סגל',la:'Mihal SIGAL (?)',dates:['נפ׳ לפני 1873'],place:'חרלאו',info:'אבי לאה; סב אברהם לייב',
+ note:`<p>על מצבת בתו בחרלאו: "לאה בת יחיאל מיכאל, אם אברהם לייב סגל". ברשימת בית הקברות של חרלאו מופיעה משפחת סגל גדולה שאביה יחיאל מיכאל (אברהם בן יחיאל מיכאל סגל, תרנ״ה, ובנות רבות).</p><p>השערה: יחיאל מיכאל דב ברקוביץ נקרא אולי גם על שמו.</p>`,
+ src:'רשימת בית הקברות של חרלאו (2008) — תעתיק מצבות'},
+{id:'shimon',row:0,x:2110,w:200,side:'b',kind:'small',cert:'v',
+ he:'שמעון',la:'Simon',dates:['המאה ה-18 / תחילת ה-19'],place:'מולדובה',info:'אבי מכל לייב רוטמן',
+ note:`<p>מוזכר כאביו של מכל לייב ("Mehel Leib sin Simon") ברשומת הנישואין משנת 1873 וברשומות לידה בחרלאו.</p><p>ה"שמשון" שבעץ המשפחתי הישן הוא כנראה שיבוש של <b>שמעון</b>.</p>`,
+ src:'מרשם חרלאו (JewishGen) — נישואין 29.7.1873; לידות 1867–1873'},
+
+/* דור 1 */
+{id:'zev',row:1,x:1600,w:200,side:'b',cert:'v',
+ he:'זאב (וולף) סגל',la:'Lupu sin Mihal',dates:['המאה ה-19'],place:'חרלאו',info:'אבי אברהם לייב סגל',
+ note:`<p>ברשומת הנישואין של בנו (1873) נרשם כ-"Lupu sin Mihal" — Lupu הוא התרגום הרומני של זאב/וולף.</p><p><b>הערה:</b> לפי הרשומה גם הוא "בן מיכאל", ואילו המצבה מייחסת את השם יחיאל מיכאל לאביה של אשתו לאה. ייתכן ערבוב בתעתיק — שם המשפחה סגל עשוי לבוא מצד לאה.</p>`,
+ src:'מרשם חרלאו — נישואין SIGAL × ROTMAN, 29.7.1873'},
+{id:'leahym',row:1,x:1840,w:200,side:'b',cert:'v',
+ he:'לאה בת יחיאל מיכאל',la:'Leia',dates:['נפ׳ <span class="hb">ח׳ אדר תרס״ט</span> · 1909'],place:'נקברה בחרלאו',info:'אם אברהם לייב סגל',
+ note:`<p>מצבתה בבית הקברות של חרלאו: "לאה בת יחיאל מיכאל, אם אברהם לייב סגל", נפטרה ח׳ אדר תרס״ט (1909). זה תואם את "Leia" אמו של אברהם לייב ברשומת הנישואין מ-1873.</p>`,
+ src:'רשימת בית הקברות של חרלאו (2008); מרשם חרלאו 1873'},
+{id:'michel',row:1,x:2110,w:200,side:'b',cert:'v',
+ he:'מכל (מיכאל) לייב רוטמן',la:'Mehel Leib ROTMAN',dates:['~1810 – לפני 3.1889'],place:'חרלאו · לפי המסורת עלה לצפת',info:'עד בלידות נכדיו עד 2.1883',
+ note:`<p><b>מכל לייב בן שמעון</b>, נולד בערך ב-1808–1816 (לפי גילו בעדויות 1876/1880/1883). חי בחרלאו לפחות עד פברואר 1883; נכד שנולד במרץ 1889 נקרא על שמו — לכן נפטר עד אז.</p><p>שם המשפחה רוטמן מאומת ברשומת הפטירה של בנו יאנקו (1898).</p><p><b>מסורת משפחתית (עדות שושנה):</b> "עלו לצפת, בין הראשונים מהעיר, וכל אנשי העיר הלכו ללוות אותם"; קברם לא נמצא. אם עלו — כנראה בין 1883 ל-1888. אין רשומת פטירה בחרלאו, אבל פנקס הפטירות חסר את השנים 1876–1888.</p>`,
+ src:'מרשם חרלאו (JewishGen): נישואין 1873, לידות 1867–1889, פטירות 1872, 1898; עדות שושנה נשר'},
+{id:'sosia',row:1,x:2350,w:200,side:'b',cert:'v',
+ he:'סוסיה רוטמן',la:'Sosa / Sosia',dates:['המאה ה-19'],place:'חרלאו · לפי המסורת עלתה לצפת',info:'אשת מכל לייב; 8 ילדים מתועדים',
+ note:`<p>מופיעה כאמם של ילדי מכל לייב ברשומות רבות בחרלאו (Sosa / Sosia). שם הנעורים אינו ידוע.</p><p>לפי המסורת עלתה עם בעלה לצפת.</p>`,
+ src:'מרשם חרלאו (JewishGen)'},
+
+/* דור 2 */
+{id:'yaakov',row:2,x:1460,w:200,side:'b',cert:'f',
+ he:'יעקב דב ברקוביץ',la:'Iacob Ber BERCOVICI (?)',dates:['המאה ה-19'],place:'מולדובה',info:'אבי בצלאל-זליג',
+ note:`<p>ידוע רק מכינוי בנו: "בצלאל בן יעקב דב" — כפי שנכתב על מצבת בצלאל בפלטיצ׳ן לפי עדות שושנה, ובעץ האבות המשפחתי.</p><p>אף אחד מקברי Bercovici בחרלאו אינו של בצלאל בן יעקב דב.</p>`,
+ src:'עדות שושנה נשר; עץ אבות משפחתי'},
+{id:'avram',row:2,x:1720,w:200,side:'b',cert:'v',
+ he:'אברהם לייב סגל',la:'Avram Leib SIGAL',dates:['נ׳ ~1847'],place:'חרלאו',info:'נישא לגיטה רוטמן ב-29.7.1873',
+ note:`<p>בן זאב (Lupu) ולאה. ברשומת הנישואין בחרלאו (29.7.1873) — בן 26.</p><p>ילדים שנמצאו: <b>חיה (15.4.1877)</b>, ביילה (21.10.1881), שטרול (נפ׳ 1896 בגיל 4).</p><p><b>זהירות:</b> באותן שנים חי בחרלאו אברהם לייב סגל נוסף, אשתו Baba.</p>`,
+ src:'מרשם חרלאו (JewishGen) — נישואין 1873, לידות 1877, 1881'},
+{id:'ghita',row:2,x:1960,w:200,side:'b',cert:'v',
+ he:'גיטה (גיזה) לבית רוטמן',la:'Ghita ROTMAN',dates:['נ׳ ~1851'],place:'חרלאו',info:'בת מכל לייב וסוסיה',
+ note:`<p>"Ghita, 22, בת Mehel Leib sin Simon ו-Sosa" ברשומת נישואיה ב-1873.</p><p>הקשר לרוטמן נסגר ברשומת הלידה של בתה ביילה (1881): העדים — "מכל לייב, סב מצד האם" ו"מרקו רוטמן, גיס האב".</p>`,
+ src:'מרשם חרלאו (JewishGen) — נישואין 1873, לידה 21.10.1881'},
+{id:'gizasibs',row:2,x:2250,w:220,side:'b',kind:'group',cert:'v',
+ he:'אחי גיזה ואחיותיה',
+ list:['אייזיק <small>(~1836–1872)</small>','הירשו / צבי <small>(~1836)</small>','מרקו / מרדכי <small>(~1843)</small>','יאנקו <small>(~1848–1898)</small>','פסיה <small>(1848)</small>','שרה · איטה'],
+ note:`<p>ילדי מכל לייב וסוסיה שתועדו ברשומות חרלאו: אייזיק (אשתו חנה, נפ׳ 1872), הירשו (אשתו טובה), מרקו (אשתו רבקה), יאנקו רוטמן (נפ׳ 30.4.1898), פסיה (נישאה לקלמן הרשקוביץ ב-1872), שרה (אשת אלטר בן שמחה), איטה (אשת אהרן).</p><p>לפי תרשים המשפחה מ-2023 גם <b>חיה</b> היא אחת מהם — ראו "השאלה הפתוחה".</p>`,
+ src:'מרשם חרלאו (JewishGen) 1867–1898'},
+{id:'kpar',row:2,x:490,w:180,side:'k',kind:'unknown',
+ he:'הורי משה מרדכי',info:'לא ידועים · רוסיה',
+ note:`<p>שמות הוריו של משה מרדכי הכהן כ״ץ אינם ידועים. לפי עדות שושנה הגיע מרוסיה כילד בן 10–12, והוברח לישיבה ברומניה מפני גזירת הקנטוניסטים.</p>`,
+ src:'עדות שושנה נשר'},
+{id:'pinchas',row:2,x:760,w:200,side:'k',cert:'f',
+ he:'פנחס מוניש',la:'MUNISCH',dates:['המאה ה-19'],place:'רוסיה ← לספס',info:'"צדיק, בקפוטה שחורה"',
+ note:`<p>לפי עדות שושנה הגיעו פנחס ורייזל מאלי מרוסיה כשבתם לאה הייתה קטנה. חגי פנחס גרין נקרא על שמו.</p><p>בעץ האבות המשפחתי מופיעים כהורי לאה — ומכאן שם המשפחה "מוניש". זה עומד בסתירה לשם הנעורים "סגל" שבתיק ה-URO (ראו לאה).</p>`,
+ src:'עדות שושנה נשר; עץ אבות משפחתי'},
+{id:'reizel',row:2,x:1000,w:200,side:'k',cert:'f',
+ he:'רייזל מאלי מוניש',la:'Reizel Mali',dates:['נפ׳ לפני 12.1929'],place:'רוסיה ← לספס',info:'שושנה-רייזל מאלי נקראה על שמה',
+ note:`<p>הנינה הבכורה, שושנה-רייזל מאלי (נ׳ 12.1929), נקראה על שמה — לכן נפטרה לפני כן.</p>`,
+ src:'עדות שושנה נשר; עץ אבות משפחתי; דפוס קריאת השמות'},
+
+/* דור 3 */
+{id:'katzbros',row:3,x:300,w:220,side:'k',kind:'group',cert:'f',
+ he:'אחי משה מרדכי',
+ list:['יצחק כ״ץ <small>— פלטיצ׳ן</small>','לייזר כ״ץ <small>— פלטיצ׳ן</small>'],
+ note:`<p>ב-1941, אחרי הגירוש מלספס, גרו בפלטיצ׳ן. אשת לייזר אירחה את המשפחה; יצחק ואשתו נתנו לדובריש לסחור בביצים בדירתם.</p>`,
+ src:'עדות שושנה נשר'},
+{id:'moshe',row:3,x:640,w:200,side:'k',cert:'p',
+ he:'משה מרדכי הכהן כ״ץ',la:'Mosche KATZ',dates:['נ׳ ~1883 · נפ׳ ~1912'],place:'רוסיה ← לספס',info:'סוחר; נפטר מדלקת ריאות בגיל 29',
+ note:`<p>"בת משה מרדכי הכהן ולאה" — ברישום חברה קדישא של דובריש; "אב: משה" בתצהיר קלמן.</p><p>לפי עדות שושנה הגיע מרוסיה כנער, היה סוחר שנסע לכפרים, ונפטר מדלקת ריאות בגיל 29, כשדובריש בת 9 וקלמן בן 7 — כלומר בערך ב-1912. נכדו משה מרדכי (1934) נקרא על שמו.</p>`,
+ src:'חברה קדישא רחובות; תיק URO (תצהיר קלמן); עדות שושנה'},
+{id:'leah',row:3,x:880,w:200,side:'k',cert:'v',
+ he:'לאה לבית סגל / מוניש',la:'Lea geb. SEGALL',dates:['נ׳ ~1884 · נפ׳ אדר 1946'],place:'לספס · נפטרה בדורוחוי',info:'התאלמנה בגיל 28 עם ארבעה יתומים',
+ note:`<p>"לאה לבית סגל" בתצהיר בנה קלמן (URO). הבית בלספס היה שלה. נפטרה באדר 1946 בדורוחוי ונקברה בחלקת נפטרי 1946, ללא מצבה. נכדתה חיה-לאה נולדה חמישה חודשים אחר כך ונקראה על שמה.</p><p><b>סתירה:</b> שם הנעורים "סגל" (URO) לעומת "מוניש" (עץ האבות, והורים פנחס ורייזל מאלי). השערה לא מבוססת: לאה וחיה (אם מיכאל), שתיהן "לבית סגל", היו קרובות.</p>`,
+ src:'תיק URO (תצהיר קלמן מוניש-כ״ץ); עדות שושנה; חקר שורשים'},
+{id:'bezalel',row:3,x:1460,w:200,side:'b',cert:'v',
+ he:'בצלאל-זליג ברקוביץ',la:'Bezalel-Zalic BERCOVICI',dates:['נפ׳ <span class="hb">כ״ז כסלו תרצ״א</span> · ~12.1930'],place:'נקבר בפלטיצ׳ן',info:'"מלמד תינוקות"; נישא שנית בפלטיצ׳ן',
+ note:`<p>בן יעקב דב. "Bezalel-Zalic" בתצהיר 1969; "Salic" בתצהיר 1960 ובטופס C של URO.</p><p>אחרי פטירת חיה נישא שנית לאישה מפלטיצ׳ן. על מצבתו בפלטיצ׳ן נכתב "מלמד תינוקות". ראה את שושנה כתינוקת; נפטר כ״ז כסלו תרצ״א (לוח הזיכרון). נכדו בצלאל (3.1931) נקרא על שמו.</p>`,
+ src:'תיק URO; רשימת עולי "טרנסילבניה" 1950; עדות שושנה; לוח זיכרון'},
+{id:'chaja',row:3,x:1740,w:200,side:'b',cert:'p',
+ he:'חיה לבית סגל',la:'Chaja geb. SEGAL · Haia SIGAL',dates:['נ׳ 15.4.1877 (סביר) · נפ׳ לפני 8.1946'],place:'חרלאו · נקברה ביאשי',info:'"מאוד חולה"; משה מצא את קברה',
+ note:`<p>"Chaja geb. Segal" — בטופס C ובתצהיר 1960 בתיק URO.</p><p><b>זיהוי סביר:</b> רשומת לידה בחרלאו — Haia SIGAL, 15.4.1877, בת אברהם לייב וגיטה. בת 27 בלידת מיכאל, ומיכאל נקרא כנראה על שם סבה מכל לייב.</p><p>לפי עדות שושנה הייתה "מאוד חולה", נקברה ביאשי, ובנה משה מצא את קברה. בפנקס הקבורה של יאשי טרם הוכרעה הרשומה.</p><p>נפטרה לפני 8.1946 (נכדתה חיה-לאה נקראה על שמה).</p>`,
+ src:'תיק URO; מרשם חרלאו (JewishGen); JOWBR יאשי; עדות שושנה'},
+{id:'chajasibs',row:3,x:2080,w:240,side:'b',kind:'group',cert:'p',
+ he:'אחי חיה ואחיותיה',
+ list:['ביילה <small>(נ׳ 21.10.1881)</small>','שטרול <small>(נפ׳ 16.10.1896, בגיל 4)</small>','מלכה סינרון <small>— פשקאני (מסורת)</small>','שני אחים — נהרגו במלחמת העולם הראשונה <small>(מסורת)</small>'],
+ note:`<p>ביילה ושטרול — מרשם חרלאו (ילדי אברהם לייב וגיטה).</p><p>לפי עדות שושנה, לחיה "משפחה ענפה": שלוש אחיות ושני אחים שנהרגו במלחמת העולם הראשונה. <b>הדודה מלכה סינרון</b> (כתיב לא ודאי) — בעלת "החנות הגדולה ביותר בפשקאני"; המשפחה גרה אצלה שלושה שבועות ביוני–יולי 1941.</p>`,
+ src:'מרשם חרלאו (JewishGen); עדות שושנה נשר'},
+
+/* דור 4 — הזוג */
+{id:'died',row:4,x:460,w:180,side:'k',kind:'small',cert:'f',
+ he:'שני ילדים',dates:['נפטרו בילדותם'],info:'מדיפתריה',
+ note:`<p>לפי עדות שושנה ו"חקר שורשים": לדובריש היו שלושה אחים — קלמן ועוד שניים שמתו בילדותם מדיפתריה. לאה התאלמנה "עם ארבעה יתומים".</p>`,
+ src:'עדות שושנה; חקר שורשים — סבתא דורה'},
+{id:'kalman',row:4,x:720,w:210,side:'k',cert:'v',
+ he:'קלמן מוניש-כ״ץ',la:'Kalman MUNISCH-KATZ',dates:['נ׳ 28.6.1905'],place:'לספס ← בית גמליאל 60',info:'⚭ פאני · בנים: משה (~1932), שלמה',
+ note:`<p>אחיה של דובריש. בתצהירו בתיק URO: אב משה, אם לאה לבית סגל, נולד בלספס 28.6.1905. פועל חקלאי, בית גמליאל 60.</p><p>גר במרכז לספס, היה שותף בחלק מעסקי המשפחה. אשתו פאני, בניהם משה ושלמה כ״ץ. עם מיכאל עבד בקיבוץ משמרות, ושניהם ממייסדי בית גמליאל.</p>`,
+ src:'תיק URO 1000/19891 (תצהירים עמ׳ 145, 151); עדות שושנה'},
+{id:'dora',row:4,x:1080,w:240,side:'k',kind:'couple',cert:'v',
+ he:'דובריש (דורה) ברקוביץ',la:'Dobrisch MUNISCH-KATZ',
+ dates:['נ׳ 10.1.1903 · <span class="hb">י״א טבת תרס״ג</span>','נפ׳ 1.1.1992 · <span class="hb">כ״ו טבת תשנ״ב</span>'],
+ place:'נולדה בלספס · נקברה ברחובות',info:'לבית מוניש-כ״ץ; סחרה בביצים בשנות המלחמה',
+ note:`<p>בת משה מרדכי הכהן ולאה. "שם משפחה קודם: מוניש כ״ץ, מוצא: רוסיה" (חקר שורשים). בבית דיברו יידיש ורומנית.</p><p>מקומות מגורים: לספס, פשקאני, פלטיצ׳ן, סוצ׳אבה, דורוחוי, שער העלייה, בית עולים פרדס חנה, בית גמליאל, רחובות.</p><p>בפלטיצ׳ן נכלאה בגלל "שוק שחור" ושוחררה בהתערבות הוועד; חלתה בטיפוס.</p>`,
+ src:'תיק URO; חברה קדישא רחובות; חקר שורשים — סבתא דורה; עדות שושנה'},
+{id:'michael',row:4,x:1400,w:240,side:'b',kind:'couple',cert:'v',
+ he:'יחיאל מיכאל דב ברקוביץ',la:'Mihail BERCOVICI',
+ dates:['נ׳ 16.11.1904','נפ׳ 5.9.1994 · <span class="hb">כ״ט אלול תשנ״ד</span>'],
+ place:'נולד בבדני (Bădeni), מחוז יאשי · נקבר ברחובות',info:'גבאי וגזבר הקהילה בלספס; ממייסדי בית גמליאל',
+ note:`<p>בן בצלאל וחיה. מקום הלידה "Badeni, Kreis Jassy" בארבעה מסמכים בתיק URO — ככל הנראה הכפר בדני, קומונת סקובינצי. מגיל 16 עבד בחנות חומרי בניין בחרלאו, ומשם הגיע ללספס.</p><p>בלספס: גבאי צדקה, גזבר הקהילה, סגן ראש הקהילה וגבאי בית הכנסת. נפטר ערב ראש השנה תשנ״ה, נקבר בבית העלמין החדש ברחובות (חלקה לה, שורה ז, מקום 26). על מצבתו: "ועוסק בצרכי ציבור באמונה".</p><p><b>שנת הנישואין שנויה במחלוקת:</b> 1925 (חקר שורשים), ~1927 ("נישאה בגיל 24"), 1928 (דוחות קודמים). לפני שושנה נולדה תינוקת שנפטרה בלידתה.</p>`,
+ src:'תיק URO-TA-Pers-1621; חברה קדישא רחובות; מצבה; עדות שושנה'},
+
+/* דור 5 — הילדים (מימין לשמאל לפי סדר הלידה) */
+{id:'k1',row:5,x:1600,w:220,side:'b',kind:'child',cert:'v',
+ he:'שושנה רייזא מאלי נשר',dates:['נ׳ כסלו תר״צ (12.1929)','נפ׳ י״ח שבט תשפ״ד (28.1.2024)'],spouse:'שמואל נשר (1921)',info:'ניר גלים',
+ note:`<p>הבכורה. עלתה ב-1947/48 דרך קפריסין; נישאה ב-29.10.1950; גרו בניר גלים. שלושה ילדים. נקראה על שם רייזל מאלי, סבתה-רבתא.</p><p><b>נוסח המצבה:</b> "חכמת לב, אהובה ומסורה · אישה יראת ה׳ היא תתהלל · חכמות נשים בנתה ביתה · שושנה רייזא מאלי נשר לבית ברקוביץ ב״ר יחיאל מיכאל דב ז״ל · נולדה כסלו ה׳תר״צ · נלב״ע י״ח שבט ה׳תשפ״ד".</p>`,
+ src:'מצבה; תיק URO; עדות שושנה'},
+{id:'k2',row:5,x:1360,w:220,side:'b',kind:'child',cert:'v',
+ he:'בצלאל ברקוביץ',dates:['16.3.1931 – 24.3.2013'],spouse:'ציפורה לבית חייקין (1932)',info:'מורה; רחובות',
+ note:`<p>עלה עם שושנה. מורה במשרד החינוך, וכך גם ציפורה. גר ברחובות. שלושה ילדים. נקרא על שם סבו בצלאל.</p>`,
+ src:'תיק URO; חברה קדישא רחובות'},
+{id:'k3',row:5,x:1120,w:220,side:'b',kind:'child',cert:'v',
+ he:'משה מרדכי ברקוביץ',dates:['3.1934 – 15.9.2014 · <span class="hb">כ׳ אלול תשע״ד</span>'],spouse:'יפה רות (1935)',info:'מחנך; שליח באורוגוואי',
+ note:`<p>עלה ב-1947 באוניית "מדינת היהודים". מורה ברמת גן, שליח בדרום אמריקה (1967–1971), מנהל בית הספר הממ״ד בבית דגן, יו״ר המועצה הדתית בגבעת שמואל. ארבעה ילדים.</p><p><b>תאריך הלידה:</b> 10.3.1934 בתיק URO, לעומת כ׳ אדר תרצ״ד (7.3.1934) בוויקיפדיה.</p>`,
+ src:'תיק URO; ויקיפדיה'},
+{id:'k4',row:5,x:880,w:220,side:'b',kind:'child',cert:'v',
+ he:'חיה-לאה גרין',dates:['נ׳ 18.8.1946'],spouse:'אברהם עבר גרין (1949)',info:'חיפה',
+ note:`<p>עלתה עם ההורים ב-1950 בת ארבע. למדה בבר-אילן; נישאה ב-22.6.1967. שתי בנות. נקראה על שם שתי הסבתות — חיה ולאה.</p>`,
+ src:'תיק URO'}
+];
+
+const MARR = [['zev','leahym'],['michel','sosia'],['avram','ghita'],['pinchas','reizel'],['bezalel','chaja'],['moshe','leah'],['michael','dora','נישאו','⁦1925–1928⁩']];
+const DESC = [
+ {p:['ymsegal'],c:['leahym'],s:'b'},
+ {p:['shimon'],c:['michel'],s:'b'},
+ {p:['zev','leahym'],c:['avram'],s:'b'},
+ {p:['michel','sosia'],c:['ghita','gizasibs'],s:'b'},
+ {p:['yaakov'],c:['bezalel'],s:'b'},
+ {p:['avram','ghita'],c:['chaja','chajasibs'],s:'b'},
+ {p:['kpar'],c:['katzbros','moshe'],s:'k'},
+ {p:['pinchas','reizel'],c:['leah'],s:'k'},
+ {p:['bezalel','chaja'],c:['michael'],s:'b'},
+ {p:['moshe','leah'],c:['died','kalman','dora'],s:'k'},
+ {p:['michael','dora'],c:['k1','k2','k3','k4'],s:'g'}
+];
+
+const QNOTE = {id:'q',side:'b',he:'השאלה הפתוחה: בת או אחות?',cert:'p',
+ note:`<p><b>ההשערה הנוכחית (סבירה):</b> חיה היא <b>בתה</b> של גיזה ואברהם לייב סגל — נולדה בחרלאו ב-15.4.1877. כך מוסבר "Chaja geb. Segal" בתיק URO, גילה (27) בלידת מיכאל, ושמו של מיכאל על שם סבה מכל לייב.</p>
+<p><b>החלופה (תרשים משפחתי 2023):</b> חיה היא <b>אחותה</b> של גיזה — בת מכל לייב וסוסיה רוטמן. אבל ילדי מכל לייב נולדו בין 1831 ל-1851, כך שחיה הייתה בת 45 לפחות בלידת מיכאל ב-1904.</p>
+<p>לפי ההשערה, "הוריה עלו לצפת" בעדות שושנה הוא דילוג של דור: מי שעלו הם <b>סבה וסבתה</b>, מכל לייב וסוסיה.</p>
+<p><b>מה יכריע:</b> נוסח המצבה ביאשי ("חיה בת…"), רישום לידת מיכאל ב-1904, או רישום נישואי בצלאל וחיה.</p>`,
+ src:'מרשם חרלאו (JewishGen); תיק URO; תרשים משפחתי 2023; עדות שושנה'};
+
+/* ---------- בנייה ---------- */
+const canvas = document.getElementById('canvas');
+const svg = document.getElementById('wires');
+const EL = {}, BY = {};
+N.forEach(n => BY[n.id] = n);
+
+function cardHTML(n){
+  let h = '';
+  if (n.cert) h += `<span class="badge ${CERT[n.cert].c}">${CERT[n.cert].t}</span>`;
+  h += `<div class="nm">${n.he}</div>`;
+  if (n.la) h += `<div class="la"><bdi>${n.la}</bdi></div>`;
+  if (n.list) h += '<ul>' + n.list.map(x => `<li>${x}</li>`).join('') + '</ul>';
+  if (n.dates) h += `<div class="dt">${n.dates.join('<br>')}</div>`;
+  if (n.spouse) h += `<div class="sp">${n.spouse}</div>`;
+  if (n.place) h += `<div class="pl">${n.place}</div>`;
+  if (n.info) h += `<div class="in">${n.info}</div>`;
+  return h;
+}
+
+N.forEach(n => {
+  const d = document.createElement('div');
+  d.className = `card ${n.side} ${n.kind || ''}`;
+  d.style.left = (n.x - n.w/2) + 'px';
+  d.style.top = ROW[n.row] + 'px';
+  d.style.width = n.w + 'px';
+  d.tabIndex = 0;
+  d.setAttribute('role','button');
+  d.innerHTML = cardHTML(n);
+  d.addEventListener('click', () => openModal(n));
+  d.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(n); } });
+  canvas.appendChild(d);
+  EL[n.id] = d;
+});
+
+/* כותרות ענפים ולוחות */
+function addHTML(cls, l, t, w, html){
+  const d = document.createElement('div');
+  d.className = cls; d.style.left = l+'px'; d.style.top = t+'px'; if (w) d.style.width = w+'px';
+  d.innerHTML = html; canvas.appendChild(d); return d;
+}
+addHTML('banner b', 1180, 40, 470, '<div class="t">ענף ברקוביץ · סגל · רוטמן</div><div class="s">חרלאו ובדני שבמחוז יאשי — ולפי המסורת, צפת</div><div class="rule"></div>');
+addHTML('banner k', 590, 300, 520, '<div class="t">ענף כ״ץ · מוניש</div><div class="s">מרוסיה ללספס ולפלטיצ׳ן</div><div class="rule"></div>');
+
+addHTML('panel', 40, 20, 470, `
+ <h3>מקרא</h3>
+ <div class="row"><span class="badge c-v">מאומת</span> מסמך או רישום ראשוני (מרשם, תיק URO, מצבה)</div>
+ <div class="row"><span class="badge c-p">סביר</span> מקור אמין אחד או הסקה חזקה</div>
+ <div class="row"><span class="badge c-o">אפשרי</span> השערה שאינה מבוססת</div>
+ <div class="row"><span class="badge c-f">מסורת משפחתית</span> עדות בעל-פה שלא אומתה</div>
+ <div class="row" style="margin-top:9px"><svg width="46" height="12"><line x1="0" y1="6" x2="46" y2="6" stroke="#4f7d63" stroke-width="2.5"/></svg> ענף ברקוביץ–סגל–רוטמן</div>
+ <div class="row"><svg width="46" height="12"><line x1="0" y1="6" x2="46" y2="6" stroke="#9a4b56" stroke-width="2.5"/></svg> ענף כ״ץ–מוניש</div>
+ <div class="row"><svg width="46" height="14"><line x1="0" y1="7" x2="46" y2="7" stroke="#b08a3e" stroke-width="2"/><circle cx="23" cy="7" r="5" fill="#fffaf0" stroke="#b08a3e" stroke-width="2"/></svg> נישואין</div>
+ <div class="row"><svg width="46" height="12"><path d="M0 6 H46" stroke="#b08a3e" stroke-width="2" stroke-dasharray="6 5"/></svg> קשר חלופי / לא מוכרע</div>
+ <div class="row" style="color:#7a6650;font-size:12.5px">שם עברי · שם כפי שנרשם במסמכים · תאריכים לועזיים ו<span style="color:#7a2e3a;font-weight:600">עבריים</span></div>`);
+
+const q = addHTML('panel q', 560, 20, 540, `
+ <h3>השאלה הפתוחה: חיה — בת גיזה או אחותה?</h3>
+ <p><b>השערה נוכחית (סבירה):</b> חיה, אם מיכאל, היא <b>בת</b> אברהם לייב סגל וגיטה רוטמן (נ׳ חרלאו 15.4.1877).</p>
+ <p><b>חלופה — תרשים 2023:</b> חיה היא <b>אחות</b> גיזה, בת מכל לייב וסוסיה. מסומן בקו מקווקו.</p>
+ <p style="color:#7a6650;font-size:12.5px">יכריעו: נוסח המצבה ביאשי או רישום לידת מיכאל (1904).</p>`);
+q.style.cursor = 'pointer';
+q.addEventListener('click', () => openModal(QNOTE));
+
+/* ---------- קווים ---------- */
+const NS = 'http://www.w3.org/2000/svg';
+const COL = {b:'#4f7d63', k:'#9a4b56', g:'#b08a3e'};
+function bx(id){
+  const e = EL[id];
+  const l = e.offsetLeft, t = e.offsetTop, w = e.offsetWidth, h = e.offsetHeight;
+  return {l, t, w, h, r:l+w, b:t+h, cx:l+w/2, cy:t+h/2};
+}
+function path(d, color, width, dash){
+  const p = document.createElementNS(NS,'path');
+  p.setAttribute('d', d); p.setAttribute('fill','none');
+  p.setAttribute('stroke', color); p.setAttribute('stroke-width', width || 2.4);
+  p.setAttribute('stroke-linecap','round'); p.setAttribute('stroke-linejoin','round');
+  if (dash) p.setAttribute('stroke-dasharray', dash);
+  svg.appendChild(p); return p;
+}
+function circle(x,y,r,fill,stroke){
+  const c = document.createElementNS(NS,'circle');
+  c.setAttribute('cx',x); c.setAttribute('cy',y); c.setAttribute('r',r);
+  c.setAttribute('fill',fill); c.setAttribute('stroke',stroke); c.setAttribute('stroke-width',2);
+  svg.appendChild(c);
+}
+function marriageY(a,b){ return Math.min(a.t,b.t) + 44; }
+function coupleAnchor(ida, idb){
+  const a = bx(ida), b = bx(idb);
+  const L = a.cx < b.cx ? a : b, R = a.cx < b.cx ? b : a;
+  return {x:(L.r + R.l)/2, y:marriageY(a,b), L, R};
+}
+const extras = [];
+function draw(){
+  svg.innerHTML = '';
+  extras.forEach(e => e.remove()); extras.length = 0;
+
+  // ירידה להורים -> ילדים
+  DESC.forEach(d => {
+    let sx, sy;
+    if (d.p.length === 2){ const a = coupleAnchor(d.p[0], d.p[1]); sx = a.x; sy = a.y; }
+    else { const p = bx(d.p[0]); sx = p.cx; sy = p.b; }
+    const kids = d.c.map(bx);
+    const top = Math.min(...kids.map(k => k.t));
+    const busY = top - 26, r = 10, col = COL[d.s];
+    kids.forEach(k => {
+      const cx = k.cx;
+      if (Math.abs(cx - sx) < 3){
+        path(`M${sx} ${sy} V${k.t}`, col);
+      } else {
+        const dir = cx > sx ? 1 : -1;
+        path(`M${sx} ${sy} V${busY - r} Q${sx} ${busY} ${sx + dir*r} ${busY} H${cx - dir*r} Q${cx} ${busY} ${cx} ${busY + r} V${k.t}`, col);
+      }
+      circle(cx, k.t, 3.2, col, col);
+    });
+  });
+
+  // נישואין
+  MARR.forEach(m => {
+    const a = coupleAnchor(m[0], m[1]);
+    path(`M${a.L.r} ${a.y} H${a.R.l}`, COL.g, 2.6);
+    circle(a.x, a.y, 6, '#fffaf0', COL.g);
+    if (m[2]){
+      const lab = document.createElement('div');
+      lab.className = 'mlabel';
+      lab.style.left = a.x + 'px'; lab.style.top = (a.y - 10) + 'px';
+      lab.innerHTML = m[2] + '<br>' + m[3];
+      canvas.appendChild(lab); extras.push(lab);
+    }
+  });
+
+  // קשר חלופי: חיה כאחות גיזה
+  const g = bx('gizasibs'), c = bx('chaja');
+  const x0 = g.l + 28, y0 = g.b, x1 = c.cx + 46, y1 = c.t;
+  const c1x = x0, c1y = y0 + 70, c2x = x1 + 40, c2y = y1 - 70;
+  path(`M${x0} ${y0} C${c1x} ${c1y} ${c2x} ${c2y} ${x1} ${y1}`, COL.g, 2.2, '7 6');
+  circle(x1, y1, 3.5, '#fffaf0', COL.g);
+  const t = .5, mt = 1 - t;
+  const mx = mt*mt*mt*x0 + 3*mt*mt*t*c1x + 3*mt*t*t*c2x + t*t*t*x1;
+  const my = mt*mt*mt*y0 + 3*mt*mt*t*c1y + 3*mt*t*t*c2y + t*t*t*y1;
+  const ql = document.createElement('div');
+  ql.className = 'qlabel';
+  ql.style.left = (mx - 40) + 'px'; ql.style.top = (my - 6) + 'px';
+  ql.textContent = 'אחות גיזה? (תרשים 2023)';
+  ql.addEventListener('click', () => openModal(QNOTE));
+  canvas.appendChild(ql); extras.push(ql);
+}
+
+/* ---------- הגדלה והתאמה ---------- */
+const stage = document.getElementById('stage'), scaler = document.getElementById('scaler');
+const W = 2500, H = 1580;
+let scale = 1, userZoom = false;
+function applyScale(s){
+  scale = s;
+  canvas.style.transform = `scale(${s})`;
+  scaler.style.width = (W*s) + 'px';
+  scaler.style.height = (H*s) + 'px';
+}
+function fit(){
+  userZoom = false;
+  const avail = Math.max(320, document.documentElement.clientWidth - 24);
+  applyScale(Math.max(.32, Math.min(1.1, avail / W)));
+}
+document.getElementById('zin').onclick = () => { userZoom = true; applyScale(Math.min(1.6, scale * 1.15)); stage.scrollLeft = stage.scrollWidth; };
+document.getElementById('zout').onclick = () => { userZoom = true; applyScale(Math.max(.25, scale / 1.15)); };
+document.getElementById('zfit').onclick = fit;
+document.getElementById('prt').onclick = () => window.print();
+window.addEventListener('resize', () => { if (!userZoom) fit(); });
+let before = 1;
+window.addEventListener('beforeprint', () => { before = scale; applyScale(1440 / W); });
+window.addEventListener('afterprint', () => applyScale(before));
+
+/* ---------- חלון פרטים ---------- */
+const overlay = document.getElementById('overlay'), modal = document.getElementById('modal');
+function openModal(n){
+  let h = `<button class="x" type="button" aria-label="סגירה">×</button>`;
+  h += `<h2>${n.he}</h2>`;
+  if (n.la) h += `<div class="la"><bdi>${n.la}</bdi></div>`;
+  if (n.cert) h += `<span class="badge ${CERT[n.cert].c}">${CERT[n.cert].t}</span>`;
+  const rows = [];
+  if (n.dates) rows.push(['תאריכים', n.dates.join('<br>')]);
+  if (n.place) rows.push(['מקום', n.place]);
+  if (n.spouse) rows.push(['בן/בת זוג', n.spouse]);
+  if (n.info) rows.push(['בקצרה', n.info]);
+  if (n.list) rows.push(['שמות', n.list.join(' · ')]);
+  if (rows.length) h += '<dl>' + rows.map(r => `<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join('') + '</dl>';
+  if (n.note) h += `<div class="note">${n.note}</div>`;
+  if (n.src) h += `<div class="src"><b>מקורות:</b> ${n.src}</div>`;
+  modal.className = 'modal ' + (n.side || '');
+  modal.innerHTML = h;
+  modal.querySelector('.x').onclick = closeModal;
+  overlay.classList.add('open');
+  modal.querySelector('.x').focus();
+}
+function closeModal(){ overlay.classList.remove('open'); }
+overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+/* ---------- תצוגה לנייד: רשימה לפי דורות ---------- */
+(function(){
+  const css = document.createElement('style');
+  css.textContent = `
+  .mob{display:none;max-width:620px;margin:0 auto;padding:4px 16px 48px}
+  body.mobile .stage{display:none}
+  body.mobile .mob{display:block}
+  body.mobile #zin, body.mobile #zout, body.mobile #zfit{display:none}
+  .mob .gen{font-family:'Frank Ruhl Libre',serif;font-size:22px;color:#3f2a1c;margin:26px 0 4px;padding-bottom:6px;border-bottom:1.5px solid #d9c49a;display:flex;align-items:baseline;gap:10px}
+  .mob .gen small{font-family:'Assistant',sans-serif;font-size:13px;color:#8a7458;font-weight:400}
+  .mob .br{font-size:13px;font-weight:700;margin:12px 0 2px;letter-spacing:.3px}
+  .mob .br.b{color:#4f7d63} .mob .br.k{color:#9a4b56}
+  .mob .card{position:relative!important;left:auto!important;top:auto!important;width:auto!important;margin:10px 0 12px;cursor:pointer}
+  .mob .rel{font-size:13.5px;color:#6b5843;margin-top:8px;padding-top:7px;border-top:1px dashed #e2d3b5;line-height:1.5}
+  .mob .rel b{color:#3f2a1c;font-weight:600}
+  .mob .panel{position:relative!important;left:auto!important;top:auto!important;width:auto!important;margin:14px 0}
+  .mob .hint{font-size:13px;color:#8a7458;text-align:center;margin:6px 0 0}`;
+  document.head.appendChild(css);
+
+  const mob = document.createElement('section');
+  mob.className = 'mob'; mob.id = 'mob';
+  stage.after(mob);
+
+  const parentsOf = {}, kidsOf = {}, spouseOf = {};
+  DESC.forEach(d => d.c.forEach(c => { parentsOf[c] = d.p; d.p.forEach(p => (kidsOf[p] = kidsOf[p] || []).push(c)); }));
+  MARR.forEach(m => { spouseOf[m[0]] = m[1]; spouseOf[m[1]] = m[0]; });
+  const nm = id => BY[id] ? BY[id].he.replace(/<[^>]+>/g,'') : '';
+
+  const GENS = [
+    [4, 'הזוג', 'יחיאל מיכאל דב ודובריש (דורה), ואחיהם'],
+    [5, 'הילדים', 'ארבעת ילדי מיכאל ודורה'],
+    [3, 'דור ההורים', 'הורי מיכאל והורי דורה'],
+    [2, 'דור הסבים', ''],
+    [1, 'דור סבי-הסבים', ''],
+    [0, 'הדור הקדום', '']
+  ];
+  let h = `<p class="hint">לחיצה על כרטיס מציגה פרטים ומקורות</p>`;
+  GENS.forEach(([row, title, sub]) => {
+    const people = N.filter(n => n.row === row);
+    if (!people.length) return;
+    h += `<h2 class="gen">${title}${sub ? `<small>${sub}</small>` : ''}</h2>`;
+    ['b','k'].forEach(side => {
+      const list = people.filter(n => n.side === side).sort((a,b) => b.x - a.x);
+      if (!list.length) return;
+      if (row !== 5) h += `<div class="br ${side}">${side === 'b' ? 'ענף ברקוביץ · סגל · רוטמן' : 'ענף כ״ץ · מוניש'}</div>`;
+      list.forEach(n => {
+        const rel = [];
+        if (parentsOf[n.id]) rel.push(`<b>${n.kind === 'group' ? 'ילדי' : 'הורים'}:</b> ${parentsOf[n.id].map(nm).join(' ו')}`);
+        if (spouseOf[n.id]) rel.push(`<b>נישואין:</b> ${nm(spouseOf[n.id])}`);
+        if (kidsOf[n.id]) rel.push(`<b>ילדים:</b> ${[...new Set(kidsOf[n.id])].map(nm).join(' · ')}`);
+        h += `<div class="card ${n.side} ${n.kind || ''}" data-id="${n.id}" tabindex="0" role="button">${cardHTML(n)}${rel.length ? `<div class="rel">${rel.join('<br>')}</div>` : ''}</div>`;
+      });
+    });
+  });
+  mob.innerHTML = h;
+  // מקרא ושאלה פתוחה גם בנייד
+  const legend = canvas.querySelector('.panel:not(.q)'), qp = canvas.querySelector('.panel.q');
+  if (qp){ const c = qp.cloneNode(true); c.onclick = () => openModal(QNOTE); c.style.cursor='pointer'; mob.prepend(c); }
+  if (legend){ mob.appendChild(legend.cloneNode(true)); }
+  mob.querySelectorAll('.card[data-id]').forEach(d => {
+    const n = BY[d.dataset.id];
+    d.addEventListener('click', () => openModal(n));
+    d.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(n); } });
+  });
+
+  const btn = document.createElement('button');
+  btn.type = 'button'; btn.id = 'vtog';
+  document.getElementById('prt').after(btn);
+  let forced = null;
+  function setMode(){
+    const m = forced !== null ? forced : document.documentElement.clientWidth < 820;
+    document.body.classList.toggle('mobile', m);
+    btn.textContent = m ? 'תצוגת עץ' : 'תצוגת רשימה';
+    if (!m){ fit(); draw(); }
+  }
+  btn.onclick = () => { forced = !document.body.classList.contains('mobile'); setMode(); };
+  window.addEventListener('resize', setMode);
+  window.addEventListener('beforeprint', () => document.body.classList.remove('mobile'));
+  window.addEventListener('afterprint', setMode);
+  window.__setMode = setMode;
+})();
+
+/* ---------- הפעלה ---------- */
+fit(); draw(); window.__setMode();
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+window.addEventListener('load', draw);
+</script>
+</body>
+</html>
