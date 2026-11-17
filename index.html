@@ -119,6 +119,7 @@ svg.wires{position:absolute;inset:0;width:2500px;height:1580px;overflow:visible;
 .modal dd{margin:0}
 .modal .note{font-size:14.5px;line-height:1.6;border-top:1px solid #e6d7b5;padding-top:10px;margin-top:6px}
 .modal .note p{margin:0 0 8px}
+.uro{color:var(--muted);font-size:.88em;font-weight:400}
 .modal .src{font-size:13px;color:var(--muted);background:#f7efdc;border-radius:10px;padding:8px 12px;margin-top:8px}
 .modal .x{position:absolute;top:10px;left:12px;border:0;background:none;font-size:26px;color:var(--muted);cursor:pointer;line-height:1}
 
@@ -167,7 +168,7 @@ footer .date{text-align:left;font-family:"Frank Ruhl Libre",serif;font-size:16px
   <div>
     <h4>מקורות עיקריים</h4>
     <ul>
-      <li>תיק הפיצויים URO-TA-Pers-1621 (תצהירי מיכאל וקלמן מוניש-כ״ץ, טופס C, פתקי עבודה, 1960–1973)</li>
+      <li>תיק הפיצויים URO-TA-Pers-1621 <span class="uro">(ארגון ה-URO ייצג ניצולי שואה בתביעות פיצויים מגרמניה)</span> (תצהירי מיכאל וקלמן מוניש-כ״ץ, טופס C, פתקי עבודה, 1960–1973)</li>
       <li>מרשם האזרחי של חרלאו — אינדקס לידות, נישואין ופטירות (JewishGen, Romania Vital Records) · פנקס הקבורה של יאשי (JOWBR)</li>
       <li>רשימת בית הקברות של חרלאו (ל. הבר גדליה, 2008) · מצבות ורישומי חברה קדישא רחובות · ויקיפדיה (משה ברקוביץ׳)</li>
       <li>עדות שושנה נשר לבית ברקוביץ · עבודת "חקר שורשים — סבתא דורה" · עץ אבות משפחתי ותרשים משפחתי 2023</li>
@@ -384,7 +385,7 @@ addHTML('banner k', 590, 300, 520, '<div class="t">ענף כ״ץ · מוניש</
 
 addHTML('panel', 40, 20, 470, `
  <h3>מקרא</h3>
- <div class="row"><span class="badge c-v">מאומת</span> מסמך או רישום ראשוני (מרשם, תיק URO, מצבה)</div>
+ <div class="row"><span class="badge c-v">מאומת</span> מסמך או רישום ראשוני (מרשם, תיק URO <span class="uro">(ארגון שייצג ניצולי שואה בתביעות פיצויים מגרמניה)</span>, מצבה)</div>
  <div class="row"><span class="badge c-p">סביר</span> מקור אמין אחד או הסקה חזקה</div>
  <div class="row"><span class="badge c-o">אפשרי</span> השערה שאינה מבוססת</div>
  <div class="row"><span class="badge c-f">מסורת משפחתית</span> עדות בעל-פה שלא אומתה</div>
@@ -526,6 +527,7 @@ function openModal(n){
   if (rows.length) h += '<dl>' + rows.map(r => `<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join('') + '</dl>';
   if (n.note) h += `<div class="note">${n.note}</div>`;
   if (n.src) h += `<div class="src"><b>מקורות:</b> ${n.src}</div>`;
+  h = h.replace(/URO(-TA-Pers-\d+| \d+\/\d+)?/g, m => `${m} <span class="uro">(ארגון שייצג ניצולי שואה בתביעות פיצויים מגרמניה)</span>`);
   modal.className = 'modal ' + (n.side || '');
   modal.innerHTML = h;
   modal.querySelector('.x').onclick = closeModal;
