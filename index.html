@@ -530,7 +530,26 @@ function openModal(n){
   modal.innerHTML = h;
   modal.querySelector('.x').onclick = closeModal;
   overlay.classList.add('open');
-  modal.querySelector('.x').focus();
+  fitOverlay();
+  modal.scrollTop = 0;
+  modal.querySelector('.x').focus({preventScroll: true});
+}
+/* בזום-אצבעות בטלפון: החלון מוצג בגודל רגיל ובתוך האזור הנראה, בלי תלות בזום */
+function fitOverlay(){
+  const v = window.visualViewport, st = overlay.style;
+  if (!overlay.classList.contains('open')) return;
+  if (!v || Math.abs(v.scale - 1) < 0.01){
+    st.left = st.top = st.width = st.height = st.transform = st.transformOrigin = ''; st.inset = ''; return;
+  }
+  const s = v.scale;
+  st.inset = 'auto';
+  st.left = v.offsetLeft + 'px'; st.top = v.offsetTop + 'px';
+  st.width = (v.width * s) + 'px'; st.height = (v.height * s) + 'px';
+  st.transformOrigin = '0 0'; st.transform = `scale(${1 / s})`;
+}
+if (window.visualViewport){
+  visualViewport.addEventListener('resize', fitOverlay);
+  visualViewport.addEventListener('scroll', fitOverlay);
 }
 function closeModal(){ overlay.classList.remove('open'); }
 overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
